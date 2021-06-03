@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hotelModelStoreContainer" CdmEntityContainer="hotelEntities">
+    <EntitySetMapping Name="kamars">
+      <EntityTypeMapping TypeName="hotelModel.kamar">
+        <MappingFragment StoreEntitySet="kamar">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+          <ScalarProperty Name="nm_kamar" ColumnName="nm_kamar" />
+          <ScalarProperty Name="tipe_kamar" ColumnName="tipe_kamar" />
+          <ScalarProperty Name="hrg" ColumnName="hrg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pelanggans">
+      <EntityTypeMapping TypeName="hotelModel.pelanggan">
+        <MappingFragment StoreEntitySet="pelanggan">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="nama_plg" ColumnName="nama_plg" />
+          <ScalarProperty Name="alamat" ColumnName="alamat" />
+          <ScalarProperty Name="tgl_lahir" ColumnName="tgl_lahir" />
+          <ScalarProperty Name="no_telp" ColumnName="no_telp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pemesanans">
+      <EntityTypeMapping TypeName="hotelModel.pemesanan">
+        <MappingFragment StoreEntitySet="pemesanan">
+          <ScalarProperty Name="no_reservasi" ColumnName="no_reservasi" />
+          <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+          <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+          <ScalarProperty Name="checkin" ColumnName="checkin" />
+          <ScalarProperty Name="checkout" ColumnName="checkout" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reservasis">
+      <EntityTypeMapping TypeName="hotelModel.reservasi">
+        <MappingFragment StoreEntitySet="reservasi">
+          <ScalarProperty Name="no_reservasi" ColumnName="no_reservasi" />
+          <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+          <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+          <ScalarProperty Name="checkin" ColumnName="checkin" />
+          <ScalarProperty Name="checkout" ColumnName="checkout" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="akuns">
+      <EntityTypeMapping TypeName="hotelModel.akun">
+        <MappingFragment StoreEntitySet="akun">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

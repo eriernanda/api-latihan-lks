@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="kamar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="no_kamar" Type="Int32" Nullable="false" />
+    <Property Name="nm_kamar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tipe_kamar" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="hrg" Type="Int32" />
+  </EntityType>
+  <EntityType Name="pelanggan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="nama_plg" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="alamat" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="tgl_lahir" Type="DateTime" Precision="0" />
+    <Property Name="no_telp" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="pemesanan">
+    <Key>
+      <PropertyRef Name="no_reservasi" />
+    </Key>
+    <Property Name="no_reservasi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+    <Property Name="no_kamar" Type="Int32" Nullable="false" />
+    <Property Name="checkin" Type="DateTime" Precision="7" />
+    <Property Name="checkout" Type="DateTime" Precision="7" />
+    <Property Name="total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="reservasi">
+    <Key>
+      <PropertyRef Name="no_reservasi" />
+    </Key>
+    <Property Name="no_reservasi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+    <Property Name="no_kamar" Type="Int32" Nullable="false" />
+    <Property Name="checkin" Type="DateTime" Precision="7" />
+    <Property Name="checkout" Type="DateTime" Precision="7" />
+    <Property Name="total" Type="Int32" />
+    <NavigationProperty Name="reservasi1" Relationship="Self.FK_reservasi_reservasi" FromRole="reservasi" ToRole="reservasi1" />
+    <NavigationProperty Name="reservasi2" Relationship="Self.FK_reservasi_reservasi" FromRole="reservasi1" ToRole="reservasi" />
+  </EntityType>
+  <EntityType Name="akun">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_reservasi_reservasi">
+    <End Role="reservasi" Type="Self.reservasi" Multiplicity="1" />
+    <End Role="reservasi1" Type="Self.reservasi" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="reservasi">
+        <PropertyRef Name="no_reservasi" />
+      </Principal>
+      <Dependent Role="reservasi1">
+        <PropertyRef Name="no_reservasi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="hotelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="kamars" EntityType="Self.kamar" />
+    <EntitySet Name="pelanggans" EntityType="Self.pelanggan" />
+    <EntitySet Name="pemesanans" EntityType="Self.pemesanan" />
+    <EntitySet Name="reservasis" EntityType="Self.reservasi" />
+    <EntitySet Name="akuns" EntityType="Self.akun" />
+    <AssociationSet Name="FK_reservasi_reservasi" Association="Self.FK_reservasi_reservasi">
+      <End Role="reservasi" EntitySet="reservasis" />
+      <End Role="reservasi1" EntitySet="reservasis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

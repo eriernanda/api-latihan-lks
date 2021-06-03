@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hotel.dbo.akun' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="akun">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="nchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="kamar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="no_kamar" Type="int" Nullable="false" />
+          <Property Name="nm_kamar" Type="nvarchar" MaxLength="50" />
+          <Property Name="tipe_kamar" Type="nvarchar" MaxLength="10" />
+          <Property Name="hrg" Type="int" />
+        </EntityType>
+        <EntityType Name="pelanggan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="20" />
+          <Property Name="password" Type="nvarchar" MaxLength="20" />
+          <Property Name="nama_plg" Type="nvarchar" MaxLength="40" />
+          <Property Name="alamat" Type="nvarchar" MaxLength="40" />
+          <Property Name="tgl_lahir" Type="date" />
+          <Property Name="no_telp" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="pemesanan">
+          <Key>
+            <PropertyRef Name="no_reservasi" />
+          </Key>
+          <Property Name="no_reservasi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pelanggan" Type="int" Nullable="false" />
+          <Property Name="no_kamar" Type="int" Nullable="false" />
+          <Property Name="checkin" Type="datetime2" Precision="7" />
+          <Property Name="checkout" Type="datetime2" Precision="7" />
+          <Property Name="total" Type="int" />
+        </EntityType>
+        <EntityType Name="reservasi">
+          <Key>
+            <PropertyRef Name="no_reservasi" />
+          </Key>
+          <Property Name="no_reservasi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pelanggan" Type="int" Nullable="false" />
+          <Property Name="no_kamar" Type="int" Nullable="false" />
+          <Property Name="checkin" Type="datetime2" Precision="7" />
+          <Property Name="checkout" Type="datetime2" Precision="7" />
+          <Property Name="total" Type="int" />
+        </EntityType>
+        <Association Name="FK_reservasi_reservasi">
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="1" />
+          <End Role="reservasi1" Type="Self.reservasi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="reservasi">
+              <PropertyRef Name="no_reservasi" />
+            </Principal>
+            <Dependent Role="reservasi1">
+              <PropertyRef Name="no_reservasi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotelModelStoreContainer">
+          <EntitySet Name="kamar" EntityType="Self.kamar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pelanggan" EntityType="Self.pelanggan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pemesanan" EntityType="Self.pemesanan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservasi" EntityType="Self.reservasi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="akun" EntityType="Self.akun" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [akun].[username] AS [username], 
+    [akun].[password] AS [password]
+    FROM [dbo].[akun] AS [akun]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_reservasi_reservasi" Association="Self.FK_reservasi_reservasi">
+            <End Role="reservasi" EntitySet="reservasi" />
+            <End Role="reservasi1" EntitySet="reservasi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="kamar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="no_kamar" Type="Int32" Nullable="false" />
+          <Property Name="nm_kamar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipe_kamar" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hrg" Type="Int32" />
+        </EntityType>
+        <EntityType Name="pelanggan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="nama_plg" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="alamat" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="tgl_lahir" Type="DateTime" Precision="0" />
+          <Property Name="no_telp" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="pemesanan">
+          <Key>
+            <PropertyRef Name="no_reservasi" />
+          </Key>
+          <Property Name="no_reservasi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+          <Property Name="no_kamar" Type="Int32" Nullable="false" />
+          <Property Name="checkin" Type="DateTime" Precision="7" />
+          <Property Name="checkout" Type="DateTime" Precision="7" />
+          <Property Name="total" Type="Int32" />
+        </EntityType>
+        <EntityType Name="reservasi">
+          <Key>
+            <PropertyRef Name="no_reservasi" />
+          </Key>
+          <Property Name="no_reservasi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pelanggan" Type="Int32" Nullable="false" />
+          <Property Name="no_kamar" Type="Int32" Nullable="false" />
+          <Property Name="checkin" Type="DateTime" Precision="7" />
+          <Property Name="checkout" Type="DateTime" Precision="7" />
+          <Property Name="total" Type="Int32" />
+          <NavigationProperty Name="reservasi1" Relationship="Self.FK_reservasi_reservasi" FromRole="reservasi" ToRole="reservasi1" />
+          <NavigationProperty Name="reservasi2" Relationship="Self.FK_reservasi_reservasi" FromRole="reservasi1" ToRole="reservasi" />
+        </EntityType>
+        <EntityType Name="akun">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_reservasi_reservasi">
+          <End Role="reservasi" Type="Self.reservasi" Multiplicity="1" />
+          <End Role="reservasi1" Type="Self.reservasi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="reservasi">
+              <PropertyRef Name="no_reservasi" />
+            </Principal>
+            <Dependent Role="reservasi1">
+              <PropertyRef Name="no_reservasi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kamars" EntityType="Self.kamar" />
+          <EntitySet Name="pelanggans" EntityType="Self.pelanggan" />
+          <EntitySet Name="pemesanans" EntityType="Self.pemesanan" />
+          <EntitySet Name="reservasis" EntityType="Self.reservasi" />
+          <EntitySet Name="akuns" EntityType="Self.akun" />
+          <AssociationSet Name="FK_reservasi_reservasi" Association="Self.FK_reservasi_reservasi">
+            <End Role="reservasi" EntitySet="reservasis" />
+            <End Role="reservasi1" EntitySet="reservasis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hotelModelStoreContainer" CdmEntityContainer="hotelEntities">
+          <EntitySetMapping Name="kamars">
+            <EntityTypeMapping TypeName="hotelModel.kamar">
+              <MappingFragment StoreEntitySet="kamar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+                <ScalarProperty Name="nm_kamar" ColumnName="nm_kamar" />
+                <ScalarProperty Name="tipe_kamar" ColumnName="tipe_kamar" />
+                <ScalarProperty Name="hrg" ColumnName="hrg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pelanggans">
+            <EntityTypeMapping TypeName="hotelModel.pelanggan">
+              <MappingFragment StoreEntitySet="pelanggan">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="nama_plg" ColumnName="nama_plg" />
+                <ScalarProperty Name="alamat" ColumnName="alamat" />
+                <ScalarProperty Name="tgl_lahir" ColumnName="tgl_lahir" />
+                <ScalarProperty Name="no_telp" ColumnName="no_telp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pemesanans">
+            <EntityTypeMapping TypeName="hotelModel.pemesanan">
+              <MappingFragment StoreEntitySet="pemesanan">
+                <ScalarProperty Name="no_reservasi" ColumnName="no_reservasi" />
+                <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+                <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+                <ScalarProperty Name="checkin" ColumnName="checkin" />
+                <ScalarProperty Name="checkout" ColumnName="checkout" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reservasis">
+            <EntityTypeMapping TypeName="hotelModel.reservasi">
+              <MappingFragment StoreEntitySet="reservasi">
+                <ScalarProperty Name="no_reservasi" ColumnName="no_reservasi" />
+                <ScalarProperty Name="id_pelanggan" ColumnName="id_pelanggan" />
+                <ScalarProperty Name="no_kamar" ColumnName="no_kamar" />
+                <ScalarProperty Name="checkin" ColumnName="checkin" />
+                <ScalarProperty Name="checkout" ColumnName="checkout" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="akuns">
+            <EntityTypeMapping TypeName="hotelModel.akun">
+              <MappingFragment StoreEntitySet="akun">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

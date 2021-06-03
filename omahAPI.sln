@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "omahAPI", "omahAPI\omahAPI.csproj", "{2A71A0A9-DD26-4B93-B3F2-EF9551F7B0E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelDataAccess", "HotelDataAccess\HotelDataAccess.csproj", "{76F4672B-0998-445E-A4CC-906E0592E934}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A71A0A9-DD26-4B93-B3F2-EF9551F7B0E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A71A0A9-DD26-4B93-B3F2-EF9551F7B0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A71A0A9-DD26-4B93-B3F2-EF9551F7B0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A71A0A9-DD26-4B93-B3F2-EF9551F7B0E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F4672B-0998-445E-A4CC-906E0592E934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F4672B-0998-445E-A4CC-906E0592E934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F4672B-0998-445E-A4CC-906E0592E934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F4672B-0998-445E-A4CC-906E0592E934}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
